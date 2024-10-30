@@ -1,0 +1,28 @@
+name: GitHub Actions Demo  
+on:   
+  push:  
+    branches:  
+      - main  
+    paths-ignore:  
+      - '.github/**'  
+  pull_request:  
+    branches:  
+      - main  
+  schedule:  
+    - cron: '15 6 * * 0' # This will run every Sunday at 6:15 UTC  
+  workflow_dispatch:  
+  
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+    steps:  
+    - name: Checkout code  
+      uses: actions/checkout@v2  
+    - name: Show trigger event name  
+      run: echo "Event that triggered this workflow: ${{ github.event_name }}"  
+    - name: Show current branch name  
+      run: echo "Branch: ${{ github.ref }}"  
+    - name: List all files  
+      run: |  
+        echo "Listing all files in repository:"  
+        ls -R  
